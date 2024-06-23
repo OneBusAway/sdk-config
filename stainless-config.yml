@@ -24,9 +24,6 @@ resources:
   arrival_and_departure_for_stop:
     methods:
       retrieve: get /api/where/arrival-and-departure-for-stop/{stopID}.json
-  # arrivals_and_departures_for_stop:
-    # methods:
-      # retrieve: get /api/where/arrivals-and-departures-for-stop/{stopID}.json
   $shared:
     models:
       references: Reference
@@ -34,7 +31,7 @@ resources:
 targets:
   node:
     package_name: onebusaway-sdk
-    production_repo: OneBusAway/js-sdk
+    production_repo: onebusaway/js-sdk
     publish:
       npm: true
   python:

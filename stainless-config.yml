@@ -37,6 +37,10 @@ resources:
     methods:
       retrieve: get /api/where/trip/{tripID}.json
 
+  trips_for_location:
+    methods:
+      retrieve: get /api/where/trips-for-location.json
+
   $shared:
     models:
       references: Reference

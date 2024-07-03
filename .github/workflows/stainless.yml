@@ -17,4 +17,4 @@ jobs:
           stainless_api_key: ${{ secrets.STAINLESS_API_KEY }}
           input_path: "./openapi.yml"
           config_path: "./stainless-config.yml"
-          project_name: 'oba'
+          project_name: "open-transit"

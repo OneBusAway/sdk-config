@@ -1,93 +1,95 @@
 # yaml-language-server: $schema=https://app.stainlessapi.com/config.schema.json
 
 organization:
-  name: onebusaway-sdk
-  docs: https://developer.onebusaway.org
-  contact: info@onebusaway.org
+    name: onebusaway-sdk
+    docs: https://developer.onebusaway.org
+    contact: info@onebusaway.org
 
 resources:
-  agencies_with_coverage:
-    methods:
-      retrieve: get /api/where/agencies-with-coverage.json
-  agency:
-    methods:
-      retrieve: get /api/where/agency/{agencyID}.json
-  config:
-    methods:
-      retrieve: get /api/where/config.json
-  current_time:
-    methods:
-      retrieve: get /api/where/current-time.json
-  stops_for_location:
-    methods:
-      retrieve: get /api/where/stops-for-location.json
-  route:
-    methods:
-      retrieve: get /api/where/route/{routeID}.json
+    agencies_with_coverage:
+        methods:
+            retrieve: get /api/where/agencies-with-coverage.json
+    agency:
+        methods:
+            retrieve: get /api/where/agency/{agencyID}.json
+    config:
+        methods:
+            retrieve: get /api/where/config.json
+    current_time:
+        methods:
+            retrieve: get /api/where/current-time.json
+    stops_for_location:
+        methods:
+            retrieve: get /api/where/stops-for-location.json
 
-  arrival_and_departure_for_stop:
-    methods:
-      retrieve: get /api/where/arrival-and-departure-for-stop/{stopID}.json
+    stops_for_route:
+        methods:
+            list: get /api/where/stops-for-route/{routeID}.json
 
-  arrivals_and_departures_for_stop:
-    methods:
-      retrieve: get /api/where/arrivals-and-departures-for-stop/{stopID}.json
+    route:
+        methods:
+            retrieve: get /api/where/route/{routeID}.json
 
-  trip:
-    methods:
-      retrieve: get /api/where/trip/{tripID}.json
+    arrival_and_departure:
+        methods:
+            list: get /api/where/arrivals-and-departures-for-stop/{stopID}.json
+            retrieve: get /api/where/arrival-and-departure-for-stop/{stopID}.json
 
-  trips_for_location:
-    methods:
-      retrieve: get /api/where/trips-for-location.json
+    trip:
+        methods:
+            retrieve: get /api/where/trip/{tripID}.json
 
-  $shared:
-    models:
-      references: Reference
-      response_wrapper: ResponseWrapper
+    trips_for_location:
+        methods:
+            retrieve: get /api/where/trips-for-location.json
+
+    $shared:
+        models:
+            references: Reference
+            response_wrapper: ResponseWrapper
 targets:
-  node:
-    package_name: onebusaway-sdk
-    production_repo: OneBusAway/js-sdk
-    publish:
-      npm: true
-  python:
-    package_name: onebusaway
-    production_repo: null
-    publish:
-      pypi: false
-    skip: true
-  go:
-    package_name: onebusaway
-    production_repo: null
-    skip: true
+    node:
+        package_name: onebusaway-sdk
+        production_repo: OneBusAway/js-sdk
+        publish:
+            npm: true
+    python:
+        package_name: onebusaway
+        production_repo: null
+        publish:
+            pypi: false
+        skip: true
+    go:
+        package_name: onebusaway
+        production_repo: null
+        skip: true
 settings:
-  license: Apache-2.0
+    license: Apache-2.0
 client_settings:
-  opts:
-    api_key:
-      type: string
-      auth:
-        security_scheme: ApiKeyAuth
-      read_env: ONEBUSAWAY_API_KEY
+    opts:
+        api_key:
+            type: string
+            auth:
+                security_scheme: ApiKeyAuth
+            read_env: ONEBUSAWAY_API_KEY
 environments:
-  production: https://api.pugetsound.onebusaway.org
+    production: https://api.pugetsound.onebusaway.org
 
 query_settings:
-  nested_format: brackets
-  array_format: repeat
+    nested_format: brackets
+    array_format: repeat
 
 readme:
-  example_requests:
-    default:
-      type: request
-      endpoint: get /api/where/current-time.json
-      params: &ref_0 {}
-    headline:
-      type: request
-      endpoint: get /api/where/current-time.json
-      params: *ref_0
-    pagination:
-      type: request
-      endpoint: get /api/where/agencies-with-coverage.json
-      params: {}
+    example_requests:
+        default:
+            type: request
+            endpoint: get /api/where/current-time.json
+            params: &ref_0 {}
+        headline:
+            type: request
+            endpoint: get /api/where/current-time.json
+            params: *ref_0
+        pagination:
+            type: request
+            endpoint: get /api/where/agencies-with-coverage.json
+            params: {}

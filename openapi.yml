@@ -334,7 +334,7 @@ paths:
 
     /api/where/stops-for-route/{routeID}.json:
         parameters:
-            - name: routeId
+            - name: routeID
               in: path
               required: true
               schema:

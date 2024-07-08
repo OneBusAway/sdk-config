@@ -1173,9 +1173,6 @@ components:
                     type: array
                     items:
                         type: string
-                subGroups:
-                    type: array
-                    items: {}
 
         StopsForRouteResponse:
             type: object

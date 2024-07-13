@@ -62,7 +62,6 @@ targets:
     production_repo: null
     publish:
       pypi: false
-    skip: true
   go:
     package_name: onebusaway
     production_repo: null

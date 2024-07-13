@@ -1,0 +1,7 @@
+{
+  "yaml.schemas": {
+    "openapi:v3": "file:///c%3A/Users/Ahmed/Desktop/GSoC/sdk-config/openapi.yml"
+  },
+
+  "editor.lineHeight": 22
+}

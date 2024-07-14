@@ -59,9 +59,10 @@ targets:
       npm: true
   python:
     package_name: onebusaway
-    production_repo: null
+    production_repo: OneBusAway/python-sdk
     publish:
-      pypi: false
+      pypi: true
+
   go:
     package_name: onebusaway
     production_repo: null
@@ -75,6 +76,7 @@ client_settings:
       auth:
         security_scheme: ApiKeyAuth
       read_env: ONEBUSAWAY_API_KEY
+
 environments:
   production: https://api.pugetsound.onebusaway.org
 

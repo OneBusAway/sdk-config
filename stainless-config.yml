@@ -47,6 +47,10 @@ resources:
     methods:
       retrieve: get /api/where/trip-details/{tripID}.json
 
+  trip_for_vehicle:
+    methods:
+      retrieve: get /api/where/trip-for-vehicle/{vehicleID}.json
+
   $shared:
     models:
       references: Reference

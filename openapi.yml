@@ -419,14 +419,14 @@ paths:
                   - $ref: '#/components/schemas/ResponseWrapper'
                   - $ref: '#/components/schemas/StopsForRouteResponse'
 
-  /api/where/trip-for-vehicle/{vehicleId}.json:
+  /api/where/trip-for-vehicle/{vehicleID}.json:
     get:
       tags:
         - default
       summary: Retrieve trip for a specific vehicle
       parameters:
         - in: path
-          name: vehicleId
+          name: vehicleID
           required: true
           schema:
             type: string

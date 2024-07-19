@@ -419,6 +419,52 @@ paths:
                   - $ref: '#/components/schemas/ResponseWrapper'
                   - $ref: '#/components/schemas/StopsForRouteResponse'
 
+  /api/where/trip-for-vehicle/{vehicleId}.json:
+    get:
+      tags:
+        - default
+      summary: Retrieve trip for a specific vehicle
+      parameters:
+        - in: path
+          name: vehicleId
+          required: true
+          schema:
+            type: string
+          description: ID of the vehicle to retrieve trip details for.
+        - in: query
+          name: time
+          schema:
+            type: integer
+            format: int64
+          description: Time parameter to query the system at a specific time (optional).
+        - in: query
+          name: includeTrip
+          schema:
+            type: boolean
+          description: Determines whether full <trip/> element is included in the <references/> section. Defaults to false.
+        - in: query
+          name: includeSchedule
+          schema:
+            type: boolean
+          description: Determines whether full <schedule/> element is included in the <tripDetails/> section. Defaults to false.
+        - in: query
+          name: includeStatus
+          schema:
+            type: boolean
+          description: Determines whether the full <status/> element is included in the <tripDetails/> section. Defaults to true.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TripVehicleResponse'
+
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -1317,6 +1363,14 @@ components:
           $ref: '#/components/schemas/Reference'
 
     TripDetailsResponse:
+      type: object
+      properties:
+        entry:
+          $ref: '#/components/schemas/TripEntry'
+        references:
+          $ref: '#/components/schemas/Reference'
+
+    TripVehicleResponse:
       type: object
       properties:
         entry:

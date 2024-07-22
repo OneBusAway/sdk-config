@@ -438,10 +438,7 @@ paths:
               schema:
                 allOf:
                   - $ref: '#/components/schemas/ResponseWrapper'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/StopResponse'
+                  - $ref: '#/components/schemas/StopResponse'
 
   /api/where/trip-for-vehicle/{vehicleID}.json:
     get:

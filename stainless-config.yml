@@ -26,6 +26,10 @@ resources:
     methods:
       list: get /api/where/stops-for-route/{routeID}.json
 
+  stop:
+    methods:
+      retrieve: get /api/where/stop/{stopID}.json
+
   route:
     methods:
       retrieve: get /api/where/route/{routeID}.json

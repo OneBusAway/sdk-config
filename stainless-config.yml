@@ -9,15 +9,19 @@ resources:
   agencies_with_coverage:
     methods:
       retrieve: get /api/where/agencies-with-coverage.json
+
   agency:
     methods:
       retrieve: get /api/where/agency/{agencyID}.json
+
   config:
     methods:
       retrieve: get /api/where/config.json
+
   current_time:
     methods:
       retrieve: get /api/where/current-time.json
+
   stops_for_location:
     methods:
       retrieve: get /api/where/stops-for-location.json
@@ -25,10 +29,6 @@ resources:
   stops_for_route:
     methods:
       list: get /api/where/stops-for-route/{routeID}.json
-
-  stop:
-    methods:
-      retrieve: get /api/where/stop/{stopID}.json
 
   route:
     methods:

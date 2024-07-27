@@ -419,6 +419,29 @@ paths:
                   - $ref: '#/components/schemas/ResponseWrapper'
                   - $ref: '#/components/schemas/StopsForRouteResponse'
 
+  /api/where/stop/{stopID}.json:
+    parameters:
+      - name: stopID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the stop
+    get:
+      summary: Get details of a specific stop
+      responses:
+        '200':
+          description: Details of the stop
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StopResponse'
+
   /api/where/trip-for-vehicle/{vehicleID}.json:
     get:
       tags:
@@ -1377,3 +1400,14 @@ components:
           $ref: '#/components/schemas/TripEntry'
         references:
           $ref: '#/components/schemas/Reference'
+
+    StopResponse:
+      type: object
+      properties:
+        entry:
+          $ref: '#/components/schemas/Stop'
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references

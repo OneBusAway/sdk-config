@@ -442,6 +442,29 @@ paths:
                       data:
                         $ref: '#/components/schemas/StopResponse'
 
+  /api/where/stop-ids-for-agency/{agencyID}.json:
+    parameters:
+      - name: agencyID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the agency
+    get:
+      summary: Get stop IDs for a specific agency
+      responses:
+        '200':
+          description: List of stop IDs for the agency
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StopIDsForAgencyResponse'
+
   /api/where/trip-for-vehicle/{vehicleID}.json:
     get:
       tags:
@@ -1410,4 +1433,19 @@ components:
           $ref: '#/components/schemas/Reference'
       required:
         - entry
+        - references
+
+    StopIDsForAgencyResponse:
+      type: object
+      properties:
+        limitExceeded:
+          type: boolean
+        list:
+          type: array
+          items:
+            type: string
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - list
         - references

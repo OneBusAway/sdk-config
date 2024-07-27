@@ -34,6 +34,10 @@ resources:
     methods:
       retrieve: get /api/where/stop/{stopID}.json
 
+  stop_ids_for_agency:
+    methods:
+      list: get /api/where/stop-ids-for-agency/{agencyID}.json
+
   route:
     methods:
       retrieve: get /api/where/route/{routeID}.json

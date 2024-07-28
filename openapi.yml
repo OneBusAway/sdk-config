@@ -1431,9 +1431,6 @@ components:
           $ref: '#/components/schemas/Stop'
         references:
           $ref: '#/components/schemas/Reference'
-      required:
-        - entry
-        - references
 
     StopIDsForAgencyResponse:
       type: object
@@ -1446,6 +1443,3 @@ components:
             type: string
         references:
           $ref: '#/components/schemas/Reference'
-      required:
-        - list
-        - references

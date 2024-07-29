@@ -14,6 +14,10 @@ resources:
     methods:
       retrieve: get /api/where/agency/{agencyID}.json
 
+  vehicles_for_agency:
+    methods:
+      list: get /api/where/vehicles-for-agency/{agencyID}.json
+
   config:
     methods:
       retrieve: get /api/where/config.json

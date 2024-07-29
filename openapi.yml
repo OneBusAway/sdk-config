@@ -199,6 +199,35 @@ paths:
                       data:
                         $ref: '#/components/schemas/ArrivalDepartureForStopResponse'
 
+  /api/where/vehicles-for-agency/{agencyID}.json:
+    parameters:
+      - name: agencyID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the agency
+      - name: time
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Specific time for querying the status (timestamp format)
+    get:
+      summary: Get vehicles for a specific agency
+      responses:
+        '200':
+          description: List of vehicles for the agency
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/VehiclesForAgencyResponse'
+
   /api/where/arrivals-and-departures-for-stop/{stopID}.json:
     get:
       tags:
@@ -546,6 +575,46 @@ components:
         - name
         - timezone
         - url
+
+    VehicleStatus:
+      type: object
+      properties:
+        vehicleId:
+          type: string
+        lastUpdateTime:
+          type: integer
+          format: int64
+        lastLocationUpdateTime:
+          type: integer
+          format: int64
+        location:
+          $ref: '#/components/schemas/Location'
+        tripId:
+          type: string
+        tripStatus:
+          $ref: '#/components/schemas/TripStatus'
+      required:
+        - vehicleId
+        - lastUpdateTime
+        - lastLocationUpdateTime
+        - location
+        - tripId
+        - tripStatus
+
+    VehiclesForAgencyResponse:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleStatus'
+        limitExceeded:
+          type: boolean
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - list
+        - references
 
     Coverage:
       type: object

@@ -593,6 +593,16 @@ components:
           type: string
         tripStatus:
           $ref: '#/components/schemas/TripStatus'
+        occupancyCapacity:
+          type: integer
+        occupancyCount:
+          type: integer
+        occupancyStatus:
+          type: string
+        phase:
+          type: string
+        status:
+          type: string
       required:
         - vehicleId
         - lastUpdateTime

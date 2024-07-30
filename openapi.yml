@@ -471,6 +471,36 @@ paths:
                       data:
                         $ref: '#/components/schemas/StopResponse'
 
+  /api/where/schedule-for-stop/{stopID}.json:
+    get:
+      summary: Get schedule for a specific stop
+      parameters:
+        - name: stopID
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The stop id to request the schedule for, encoded directly in the URL
+        - name: date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: The date for which you want to request a schedule in the format YYYY-MM-DD (optional, defaults to the current date)
+      responses:
+        '200':
+          description: Schedule information for the stop
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/ScheduleForStopResponse'
+
   /api/where/stop-ids-for-agency/{agencyID}.json:
     parameters:
       - name: agencyID
@@ -1522,3 +1552,115 @@ components:
             type: string
         references:
           $ref: '#/components/schemas/Reference'
+
+    ScheduleFrequency:
+      type: object
+      properties:
+        serviceDate:
+          type: integer
+          format: int64
+        startTime:
+          type: integer
+          format: int64
+        endTime:
+          type: integer
+          format: int64
+        headway:
+          type: integer
+          format: int32
+        serviceId:
+          type: string
+        tripId:
+          type: string
+      required:
+        - serviceDate
+        - startTime
+        - endTime
+        - headway
+        - serviceId
+        - tripId
+
+    StopRouteDirectionSchedule:
+      type: object
+      properties:
+        scheduleFrequencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduleFrequency'
+        scheduleStopTimes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduleStopTime'
+        tripHeadsign:
+          type: string
+      required:
+        - scheduleStopTimes
+        - tripHeadsign
+
+    ScheduleStopTime:
+      type: object
+      properties:
+        arrivalEnabled:
+          type: boolean
+        arrivalTime:
+          type: integer
+          format: int64
+        departureEnabled:
+          type: boolean
+        departureTime:
+          type: integer
+          format: int64
+        serviceId:
+          type: string
+        stopHeadsign:
+          type: string
+        tripId:
+          type: string
+      required:
+        - arrivalEnabled
+        - arrivalTime
+        - departureEnabled
+        - departureTime
+        - serviceId
+        - tripId
+
+    StopRouteSchedule:
+      type: object
+      properties:
+        routeId:
+          type: string
+        stopRouteDirectionSchedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/StopRouteDirectionSchedule'
+      required:
+        - routeId
+        - stopRouteDirectionSchedules
+
+    ScheduleForStopEntry:
+      type: object
+      properties:
+        date:
+          type: integer
+          format: int64
+        stopId:
+          type: string
+        stopRouteSchedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/StopRouteSchedule'
+      required:
+        - date
+        - stopId
+        - stopRouteSchedules
+
+    ScheduleForStopResponse:
+      type: object
+      properties:
+        entry:
+          $ref: '#/components/schemas/ScheduleForStopEntry'
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references

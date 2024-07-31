@@ -677,10 +677,11 @@ components:
           type: boolean
         entry:
           $ref: '#/components/schemas/Agency'
-
         references:
           $ref: '#/components/schemas/Reference'
-
+      required:
+        - entry
+        - references
     CoverageResponse:
       type: object
       properties:
@@ -692,6 +693,9 @@ components:
             $ref: '#/components/schemas/Coverage'
         references:
           $ref: '#/components/schemas/Reference'
+      required:
+        - list
+        - references
 
     CurrentTime:
       type: object
@@ -708,6 +712,9 @@ components:
           $ref: '#/components/schemas/CurrentTime'
         references:
           $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references
 
     ResponseWrapper:
       type: object
@@ -1044,6 +1051,9 @@ components:
           $ref: '#/components/schemas/Config'
         references:
           $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references
 
     StopsForLocation:
       type: object

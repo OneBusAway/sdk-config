@@ -118,12 +118,6 @@ paths:
         - default
       summary: stops-for-location
       parameters:
-        - name: key
-          in: query
-          required: true
-          schema:
-            type: string
-          example: 'TEST'
         - name: lat
           in: query
           schema:

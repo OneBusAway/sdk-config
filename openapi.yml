@@ -1086,6 +1086,9 @@ components:
             $ref: '#/components/schemas/StopsForLocation'
         references:
           $ref: '#/components/schemas/Reference'
+      required:
+        - list
+        - references
 
     ArrivalDepartureForStop:
       type: object
@@ -1224,6 +1227,9 @@ components:
           $ref: '#/components/schemas/ArrivalDepartureForStop'
         references:
           $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references
 
     ArrivalsDeparturesForStopResponse:
       type: object
@@ -1235,8 +1241,13 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/ArrivalDepartureForStop'
+          required:
+            - arrivalsAndDepartures
         references:
           $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references
 
     RouteResponse:
       type: object
@@ -1245,6 +1256,9 @@ components:
           $ref: '#/components/schemas/RouteEntry'
         references:
           $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references
 
     Polylines:
       type: object
@@ -1308,7 +1322,9 @@ components:
                     example: '1_10911'
             references:
               $ref: '#/components/schemas/Reference'
-
+      required:
+        - data
+        - references
     # Trip Components
     TripEntry:
       type: object
@@ -1495,6 +1511,10 @@ components:
         references:
           $ref: '#/components/schemas/Reference'
 
+      required:
+        - entry
+        - references
+
     TripsForLocationResponse:
       type: object
       properties:
@@ -1511,6 +1531,10 @@ components:
         references:
           $ref: '#/components/schemas/Reference'
 
+      required:
+        - list
+        - references
+
     TripDetailsResponse:
       type: object
       properties:
@@ -1519,6 +1543,10 @@ components:
         references:
           $ref: '#/components/schemas/Reference'
 
+      required:
+        - entry
+        - references
+
     TripVehicleResponse:
       type: object
       properties:
@@ -1526,6 +1554,9 @@ components:
           $ref: '#/components/schemas/TripEntry'
         references:
           $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references
 
     StopResponse:
       type: object
@@ -1534,6 +1565,10 @@ components:
           $ref: '#/components/schemas/Stop'
         references:
           $ref: '#/components/schemas/Reference'
+
+      required:
+        - entry
+        - references
 
     StopIDsForAgencyResponse:
       type: object
@@ -1546,6 +1581,9 @@ components:
             type: string
         references:
           $ref: '#/components/schemas/Reference'
+      required:
+        - list
+        - references
 
     ScheduleFrequency:
       type: object

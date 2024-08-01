@@ -26,6 +26,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/CoverageResponse'
+                    required:
+                      - data
 
   /api/where/agency/{agencyID}.json:
     get:
@@ -50,6 +52,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/AgencyResponse'
+                    required:
+                      - data
 
   /api/where/route/{routeID}.json:
     get:
@@ -75,6 +79,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/RouteResponse'
+                    required:
+                      - data
 
   /api/where/config.json:
     get:
@@ -93,6 +99,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/ConfigResponse'
+                    required:
+                      - data
 
   /api/where/current-time.json:
     get:
@@ -111,6 +119,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/CurrentTimeResponse'
+                    required:
+                      - data
 
   /api/where/stops-for-location.json:
     get:
@@ -140,6 +150,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/StopsForLocationResponse'
+                    required:
+                      - data
 
   /api/where/arrival-and-departure-for-stop/{stopID}.json:
     get:
@@ -192,6 +204,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/ArrivalDepartureForStopResponse'
+                    required:
+                      - data
 
   /api/where/vehicles-for-agency/{agencyID}.json:
     parameters:
@@ -221,6 +235,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/VehiclesForAgencyResponse'
+                    required:
+                      - data
 
   /api/where/arrivals-and-departures-for-stop/{stopID}.json:
     get:
@@ -267,6 +283,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/ArrivalsDeparturesForStopResponse'
+                    required:
+                      - data
 
   /api/where/trip/{tripID}.json:
     parameters:
@@ -290,6 +308,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/TripResponse'
+                    required:
+                      - data
 
   /api/where/trips-for-location.json:
     get:
@@ -354,6 +374,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/TripsForLocationResponse'
+                    required:
+                      - data
 
   /api/where/trip-details/{tripID}.json:
     get:
@@ -411,6 +433,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/TripDetailsResponse'
+                    required:
+                      - data
 
   /api/where/stops-for-route/{routeID}.json:
     parameters:
@@ -465,6 +489,9 @@ paths:
                       data:
                         $ref: '#/components/schemas/StopResponse'
 
+                    required:
+                      - data
+
   /api/where/schedule-for-stop/{stopID}.json:
     get:
       summary: Get schedule for a specific stop
@@ -494,6 +521,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/ScheduleForStopResponse'
+                    required:
+                      - data
 
   /api/where/stop-ids-for-agency/{agencyID}.json:
     parameters:
@@ -517,6 +546,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/StopIDsForAgencyResponse'
+                    required:
+                      - data
 
   /api/where/trip-for-vehicle/{vehicleID}.json:
     get:
@@ -563,6 +594,8 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/TripVehicleResponse'
+                    required:
+                      - data
 
 components:
   securitySchemes:

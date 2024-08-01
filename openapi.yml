@@ -1124,6 +1124,14 @@ components:
             type: string
         wheelchairBoarding:
           type: string
+      required:
+        - id
+        - lat
+        - lon
+        - name
+        - parent
+        - routeIds
+        - staticRouteIds
 
     StopsForLocationResponse:
       type: object
@@ -1139,6 +1147,7 @@ components:
       required:
         - list
         - references
+        - limitExceeded
 
     ArrivalDepartureForStop:
       type: object

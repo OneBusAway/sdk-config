@@ -793,6 +793,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Trip'
+      required:
+        - agencies
+        - routes
+        - situations
+        - stopTimes
+        - stops
+        - trips
 
     Route:
       type: object

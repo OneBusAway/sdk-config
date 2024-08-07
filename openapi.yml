@@ -82,6 +82,31 @@ paths:
                     required:
                       - data
 
+  /api/where/route-ids-for-agency/{agencyID}.json:
+    parameters:
+      - name: agencyID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the agency
+    get:
+      summary: Get route IDs for a specific agency
+      responses:
+        '200':
+          description: List of routeIDs for the agency
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/RouteIDsForAgencyResponse'
+                    required:
+                      - data
+
   /api/where/config.json:
     get:
       tags:
@@ -1317,6 +1342,21 @@ components:
           $ref: '#/components/schemas/Reference'
       required:
         - entry
+        - references
+
+    RouteIDsForAgencyResponse:
+      type: object
+      properties:
+        limitExceeded:
+          type: boolean
+        list:
+          type: array
+          items:
+            type: string
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - list
         - references
 
     Polylines:

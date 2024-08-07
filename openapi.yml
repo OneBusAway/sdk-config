@@ -107,6 +107,61 @@ paths:
                     required:
                       - data
 
+  /api/where/routes-for-location.json:
+    get:
+      tags:
+        - default
+      summary: routes-for-location
+      parameters:
+        - name: lat
+          in: query
+          schema:
+            type: number
+          example: 47.653435
+          required: true
+        - name: lon
+          in: query
+          schema:
+            type: number
+          example: -122.305641
+          required: true
+        - name: radius
+          in: query
+          schema:
+            type: number
+          required: false
+        - name: latSpan
+          in: query
+          schema:
+            type: number
+          required: false
+        - name: lonSpan
+          in: query
+          schema:
+            type: number
+
+          required: false
+        - name: query
+          in: query
+          schema:
+            type: string
+          required: false
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/RoutesForLocationResponse'
+                    required:
+                      - data
+
   /api/where/config.json:
     get:
       tags:
@@ -461,6 +516,54 @@ paths:
                     required:
                       - data
 
+  /api/where/trip-for-vehicle/{vehicleID}.json:
+    get:
+      tags:
+        - default
+      summary: Retrieve trip for a specific vehicle
+      parameters:
+        - in: path
+          name: vehicleID
+          required: true
+          schema:
+            type: string
+          description: ID of the vehicle to retrieve trip details for.
+        - in: query
+          name: time
+          schema:
+            type: integer
+            format: int64
+          description: Time parameter to query the system at a specific time (optional).
+        - in: query
+          name: includeTrip
+          schema:
+            type: boolean
+          description: Determines whether full <trip/> element is included in the <references/> section. Defaults to false.
+        - in: query
+          name: includeSchedule
+          schema:
+            type: boolean
+          description: Determines whether full <schedule/> element is included in the <tripDetails/> section. Defaults to false.
+        - in: query
+          name: includeStatus
+          schema:
+            type: boolean
+          description: Determines whether the full <status/> element is included in the <tripDetails/> section. Defaults to true.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TripVehicleResponse'
+                    required:
+                      - data
+
   /api/where/stops-for-route/{routeID}.json:
     parameters:
       - name: routeID
@@ -571,54 +674,6 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/StopIDsForAgencyResponse'
-                    required:
-                      - data
-
-  /api/where/trip-for-vehicle/{vehicleID}.json:
-    get:
-      tags:
-        - default
-      summary: Retrieve trip for a specific vehicle
-      parameters:
-        - in: path
-          name: vehicleID
-          required: true
-          schema:
-            type: string
-          description: ID of the vehicle to retrieve trip details for.
-        - in: query
-          name: time
-          schema:
-            type: integer
-            format: int64
-          description: Time parameter to query the system at a specific time (optional).
-        - in: query
-          name: includeTrip
-          schema:
-            type: boolean
-          description: Determines whether full <trip/> element is included in the <references/> section. Defaults to false.
-        - in: query
-          name: includeSchedule
-          schema:
-            type: boolean
-          description: Determines whether full <schedule/> element is included in the <tripDetails/> section. Defaults to false.
-        - in: query
-          name: includeStatus
-          schema:
-            type: boolean
-          description: Determines whether the full <status/> element is included in the <tripDetails/> section. Defaults to true.
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseWrapper'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/TripVehicleResponse'
                     required:
                       - data
 
@@ -1314,6 +1369,25 @@ components:
       required:
         - entry
         - references
+
+    RoutesForLocationResponse:
+      type: object
+      properties:
+        limitExceeded:
+          type: boolean
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Route'
+        outOfRange:
+          type: boolean
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - list
+        - references
+        - limitExceeded
+        - outOfRange
 
     ArrivalsDeparturesForStopResponse:
       type: object

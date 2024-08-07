@@ -107,6 +107,40 @@ paths:
                     required:
                       - data
 
+  /api/where/schedule-for-route/{routeID}.json:
+    get:
+      tags:
+        - default
+      summary: Retrieve the full schedule for a route on a particular day
+      parameters:
+        - name: routeID
+          in: path
+          description: The route id to request the schedule for
+          schema:
+            type: string
+          example: '1_100223'
+          required: true
+        - name: date
+          in: query
+          description: The date for which you want to request a schedule in the format YYYY-MM-DD (optional, defaults to current date)
+          schema:
+            type: string
+          example: '2024-08-12'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/ScheduleForRouteResponse'
+                    required:
+                      - data
+
   /api/where/routes-for-location.json:
     get:
       tags:
@@ -1365,6 +1399,77 @@ components:
           type: string
           description: ID of the transit vehicle serving this trip.
 
+    ScheduleEntry:
+      type: object
+      properties:
+        routeId:
+          type: string
+        scheduleDate:
+          type: integer
+        serviceIds:
+          type: array
+          items:
+            type: string
+        stopTripGroupings:
+          type: array
+          items:
+            $ref: '#/components/schemas/StopTripGrouping'
+        stops:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stop'
+        trips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trip'
+      required:
+        - routeId
+        - scheduleDate
+        - serviceIds
+        - stopTripGroupings
+        - stops
+        - trips
+
+    StopTripGrouping:
+      type: object
+      properties:
+        directionId:
+          type: string
+        stopIds:
+          type: array
+          items:
+            type: string
+        tripHeadsigns:
+          type: array
+          items:
+            type: string
+        tripIds:
+          type: array
+          items:
+            type: string
+        tripsWithStopTimes:
+          type: array
+          items:
+            $ref: '#/components/schemas/TripWithStopTimes'
+      required:
+        - directionId
+        - stopIds
+        - tripHeadsigns
+        - tripIds
+
+    TripWithStopTimes:
+      type: object
+      properties:
+        tripId:
+          type: string
+        stopTimes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetailedScheduleStopTime'
+      required:
+        - tripId
+        - stopTimes
+
     RouteEntry:
       type: object
       properties:
@@ -1416,6 +1521,14 @@ components:
         - references
         - limitExceeded
         - outOfRange
+
+    ScheduleForRouteResponse:
+      type: object
+      properties:
+        entry:
+          $ref: '#/components/schemas/ScheduleEntry'
+      required:
+        - entry
 
     ArrivalsDeparturesForStopResponse:
       type: object
@@ -1871,6 +1984,33 @@ components:
         - departureEnabled
         - departureTime
         - serviceId
+        - tripId
+
+    DetailedScheduleStopTime:
+      type: object
+      properties:
+        arrivalEnabled:
+          type: boolean
+        arrivalTime:
+          type: integer
+        departureEnabled:
+          type: boolean
+        departureTime:
+          type: integer
+        serviceId:
+          type: string
+        stopHeadsign:
+          type: string
+        stopId:
+          type: string
+        tripId:
+          type: string
+      required:
+        - arrivalEnabled
+        - arrivalTime
+        - departureEnabled
+        - departureTime
+        - stopId
         - tripId
 
     StopRouteSchedule:

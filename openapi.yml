@@ -162,6 +162,34 @@ paths:
                     required:
                       - data
 
+  /api/where/routes-for-agency/{agencyID}.json:
+    get:
+      tags:
+        - default
+      summary: Retrieve the list of all routes for a particular agency by id
+      parameters:
+        - name: agencyID
+          in: path
+          required: true
+          description: The id of the agency
+          schema:
+            type: string
+          example: '40'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/RoutesForAgencyResponse'
+                    required:
+                      - data
+
   /api/where/config.json:
     get:
       tags:
@@ -1432,6 +1460,22 @@ components:
       required:
         - list
         - references
+
+    RoutesForAgencyResponse:
+      type: object
+      properties:
+        limitExceeded:
+          type: boolean
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Route'
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - list
+        - references
+        - limitExceeded
 
     Polylines:
       type: object

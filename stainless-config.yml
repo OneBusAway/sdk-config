@@ -54,6 +54,10 @@ resources:
     methods:
       list: get /api/where/route-ids-for-agency/{agencyID}.json
 
+  routes_for_location:
+    methods:
+      retrieve: get /api/where/route-for-location.json
+
   arrival_and_departure:
     methods:
       list: get /api/where/arrivals-and-departures-for-stop/{stopID}.json

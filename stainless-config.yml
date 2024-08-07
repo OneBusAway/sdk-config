@@ -56,7 +56,7 @@ resources:
 
   routes_for_location:
     methods:
-      retrieve: get /api/where/route-for-location.json
+      retrieve: get /api/where/routes-for-location.json
 
   routes_for_agency:
     methods:

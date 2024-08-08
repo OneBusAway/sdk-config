@@ -802,6 +802,71 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseWrapper'
 
+  # Search endpoints
+  /api/where/search/stop.json:
+    get:
+      summary: Search for a stop based on its name.
+      operationId: searchStop
+      parameters:
+        - name: input
+          in: query
+          description: The string to search for.
+          required: true
+          schema:
+            type: string
+        - name: maxCount
+          in: query
+          description: The max number of results to return. Defaults to 20.
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful stop search.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SearchStopResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/where/search/route.json:
+    get:
+      summary: Search for a route based on its name.
+      operationId: searchRoute
+      parameters:
+        - name: input
+          in: query
+          description: The string to search for.
+          required: true
+          schema:
+            type: string
+        - name: maxCount
+          in: query
+          description: The max number of results to return. Defaults to 20.
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful route search.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SearchRouteResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -2116,3 +2181,54 @@ components:
       required:
         - entry
         - references
+
+    SearchStopResponse:
+      type: object
+      properties:
+        limitExceeded:
+          type: boolean
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stop'
+        outOfRange:
+          type: boolean
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - limitExceeded
+        - list
+        - outOfRange
+        - references
+
+    SearchRouteResponse:
+      type: object
+      properties:
+        limitExceeded:
+          type: boolean
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Route'
+        outOfRange:
+          type: boolean
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - limitExceeded
+        - list
+        - outOfRange
+        - references
+
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseWrapper'
+          example:
+            code: 404
+            currentTime: 1723054063108
+            text: 'resource not found'
+            version: 2

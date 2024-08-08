@@ -91,6 +91,14 @@ resources:
     methods:
       retrieve: get /api/where/report-problem-with-stop/{stopID}.json
 
+  search_for_stop:
+    methods:
+      retrieve: get /api/where/search/stop.json
+
+  search_for_route:
+    methods:
+      retrieve: get /api/where/search/route.json
+
   $shared:
     models:
       references: Reference

@@ -87,6 +87,10 @@ resources:
     methods:
       retrieve: get /api/where/trip-for-vehicle/{vehicleID}.json
 
+  report_problem_with_stop:
+    methods:
+      retrieve: get /api/where/report-problem-with-stop/{stopID}.json
+
   $shared:
     models:
       references: Reference

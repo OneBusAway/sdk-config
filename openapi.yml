@@ -815,13 +815,13 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: vehicleId
+        - name: vehicleID
           in: query
           required: false
           description: The vehicle actively serving the trip
           schema:
             type: string
-        - name: stopId
+        - name: stopID
           in: query
           required: false
           description: A stop ID indicating where the user is experiencing the problem

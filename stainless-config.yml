@@ -91,6 +91,10 @@ resources:
     methods:
       retrieve: get /api/where/report-problem-with-stop/{stopID}.json
 
+  report_problem_with_trip:
+    methods:
+      retrieve: get /api/where/report-problem-with-trip/{tripID}.json
+
   search_for_stop:
     methods:
       retrieve: get /api/where/search/stop.json

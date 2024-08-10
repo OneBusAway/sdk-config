@@ -742,6 +742,7 @@ paths:
   /api/where/report-problem-with-stop/{stopID}.json:
     get:
       summary: Submit a user-generated problem report for a stop
+      operationId: reportProblemWithStop
       parameters:
         - name: stopID
           in: path
@@ -795,8 +796,92 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseWrapper'
-        '404':
-          description: The specified stop was not found
+
+  /api/where/report-problem-with-trip/{tripID}.json:
+    get:
+      summary: Submit a user-generated problem report for a particular trip.
+      operationId: reportProblemWithTrip
+      parameters:
+        - name: tripID
+          in: path
+          required: true
+          description: The ID of the trip
+          schema:
+            type: string
+        - name: serviceDate
+          in: query
+          required: false
+          description: The service date of the trip
+          schema:
+            type: integer
+            format: int64
+        - name: vehicleId
+          in: query
+          required: false
+          description: The vehicle actively serving the trip
+          schema:
+            type: string
+        - name: stopId
+          in: query
+          required: false
+          description: A stop ID indicating where the user is experiencing the problem
+          schema:
+            type: string
+        - name: code
+          in: query
+          required: false
+          description: A string code identifying the nature of the problem
+          schema:
+            type: string
+            enum:
+              - vehicle_never_came
+              - vehicle_came_early
+              - vehicle_came_late
+              - wrong_headsign
+              - vehicle_does_not_stop_here
+              - other
+        - name: userComment
+          in: query
+          required: false
+          description: Additional comment text supplied by the user describing the problem
+          schema:
+            type: string
+        - name: userOnVehicle
+          in: query
+          required: false
+          description: Indicator if the user is on the transit vehicle experiencing the problem
+          schema:
+            type: boolean
+        - name: userVehicleNumber
+          in: query
+          required: false
+          description: The vehicle number, as reported by the user
+          schema:
+            type: string
+        - name: userLat
+          in: query
+          required: false
+          description: The reporting user’s current latitude
+          schema:
+            type: number
+            format: float
+        - name: userLon
+          in: query
+          required: false
+          description: The reporting user’s current longitude
+          schema:
+            type: number
+            format: float
+        - name: userLocationAccuracy
+          in: query
+          required: false
+          description: The reporting user’s location accuracy, in meters
+          schema:
+            type: number
+            format: float
+      responses:
+        '200':
+          description: Problem report successfully submitted
           content:
             application/json:
               schema:

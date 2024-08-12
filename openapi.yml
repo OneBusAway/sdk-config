@@ -952,6 +952,30 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /api/where/block/{blockID}.json:
+    parameters:
+      - name: blockID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the block
+    get:
+      summary: Get details of a specific block by ID
+      responses:
+        '200':
+          description: Details of the block
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/BlockResponse'
+                    required:
+                      - data
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -2285,6 +2309,104 @@ components:
         - list
         - outOfRange
         - references
+
+    BlockResponse:
+      type: object
+      properties:
+        entry:
+          $ref: '#/components/schemas/BlockEntry'
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references
+
+    BlockEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        configurations:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlockConfiguration'
+      required:
+        - id
+        - configurations
+
+    BlockConfiguration:
+      type: object
+      properties:
+        activeServiceIds:
+          type: array
+          items:
+            type: string
+        inactiveServiceIds:
+          type: array
+          items:
+            type: string
+        trips:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlockTrip'
+      required:
+        - activeServiceIds
+        - trips
+
+    BlockTrip:
+      type: object
+      properties:
+        tripId:
+          type: string
+        distanceAlongBlock:
+          type: number
+          format: float
+        accumulatedSlackTime:
+          type: number
+          format: float
+        blockStopTimes:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlockStopTime'
+      required:
+        - tripId
+        - blockStopTimes
+        - distanceAlongBlock
+        - accumulatedSlackTime
+
+    BlockStopTime:
+      type: object
+      properties:
+        blockSequence:
+          type: integer
+        distanceAlongBlock:
+          type: number
+          format: float
+        accumulatedSlackTime:
+          type: number
+          format: float
+        stopTime:
+          type: object
+          properties:
+            stopId:
+              type: string
+            arrivalTime:
+              type: integer
+            departureTime:
+              type: integer
+            pickupType:
+              type: integer
+            dropOffType:
+              type: integer
+          required:
+            - stopId
+            - arrivalTime
+            - departureTime
+      required:
+        - blockSequence
+        - stopTime
+        - distanceAlongBlock
+        - accumulatedSlackTime
 
     SearchRouteResponse:
       type: object

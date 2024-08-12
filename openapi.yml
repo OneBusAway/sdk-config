@@ -976,6 +976,32 @@ paths:
                         $ref: '#/components/schemas/BlockResponse'
                     required:
                       - data
+
+  /api/where/shape/{shapeID}.json:
+    get:
+      summary: Retrieve a shape by ID
+      description: 'Retrieve a shape (the path traveled by a transit vehicle) by ID.'
+      parameters:
+        - name: shapeID
+          in: path
+          required: true
+          description: The shape ID, encoded directly in the URL
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The shape of the path traveled by the transit vehicle
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/ShapeResponse'
+                    required:
+                      - data
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -2407,6 +2433,28 @@ components:
         - stopTime
         - distanceAlongBlock
         - accumulatedSlackTime
+
+    ShapeResponse:
+      type: object
+      properties:
+        entry:
+          type: object
+          properties:
+            length:
+              type: integer
+            levels:
+              type: string
+            points:
+              type: string
+              description: Encoded polyline format representing the shape of the path
+          required:
+            - length
+            - points
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references
 
     SearchRouteResponse:
       type: object

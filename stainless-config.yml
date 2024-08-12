@@ -103,6 +103,10 @@ resources:
     methods:
       retrieve: get /api/where/search/route.json
 
+  block:
+    methods:
+      retrieve: get /api/where/block/{blockID}.json
+
   $shared:
     models:
       references: Reference

@@ -107,6 +107,10 @@ resources:
     methods:
       retrieve: get /api/where/block/{blockID}.json
 
+  shape:
+    methods:
+      retrieve: get /api/where/shape/{shapeID}.json
+
   $shared:
     models:
       references: Reference

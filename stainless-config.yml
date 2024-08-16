@@ -8,7 +8,7 @@ organization:
 resources:
   agencies_with_coverage:
     methods:
-      list: gset /api/where/agencies-with-coverage.json
+      list: get /api/where/agencies-with-coverage.json
 
   agency:
     methods:

@@ -8,7 +8,7 @@ organization:
 resources:
   agencies_with_coverage:
     methods:
-      retrieve: get /api/where/agencies-with-coverage.json
+      list: gset /api/where/agencies-with-coverage.json
 
   agency:
     methods:
@@ -86,6 +86,10 @@ resources:
   trip_for_vehicle:
     methods:
       retrieve: get /api/where/trip-for-vehicle/{vehicleID}.json
+
+  trips_for_route:
+    methods:
+      list: get /api/where/trips-for-route/{routeID}.json
 
   report_problem_with_stop:
     methods:

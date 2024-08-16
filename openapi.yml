@@ -13,7 +13,7 @@ paths:
     get:
       tags:
         - default
-      summary: Retrieve Agencies with Coverage
+      summary: Returns a list of all transit agencies currently supported by OneBusAway along with the center of their coverage area.
       responses:
         '200':
           description: Successful response
@@ -450,6 +450,65 @@ paths:
                     properties:
                       data:
                         $ref: '#/components/schemas/TripResponse'
+                    required:
+                      - data
+
+  /api/where/trips-for-route/{routeID}.json:
+    get:
+      tags:
+        - default
+      summary: Search for active trips for a specific route.
+      parameters:
+        - name: routeID
+          in: path
+          required: true
+          description: The ID of the route.
+          schema:
+            type: string
+        - name: includeStatus
+          in: query
+          required: false
+          description: Determine whether full tripStatus elements with real-time information are included. Defaults to false.
+          schema:
+            type: boolean
+        - name: includeSchedule
+          in: query
+          required: false
+          description: Determine whether full schedule elements are included. Defaults to false.
+          schema:
+            type: boolean
+        - name: time
+          in: query
+          required: false
+          description: Query the system at a specific time. Useful for testing.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          limitExceeded:
+                            type: boolean
+                          list:
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/TripDetails'
+                          references:
+                            $ref: '#/components/schemas/Reference'
+                        required:
+                          - list
+                          - limitExceeded
+                          - references
                     required:
                       - data
 
@@ -1086,6 +1145,7 @@ components:
           $ref: '#/components/schemas/Reference'
       required:
         - list
+        - limitExceeded
         - references
 
     Coverage:
@@ -1119,6 +1179,7 @@ components:
           $ref: '#/components/schemas/Reference'
       required:
         - entry
+        - limitExceeded
         - references
     CoverageResponse:
       type: object
@@ -1133,6 +1194,7 @@ components:
           $ref: '#/components/schemas/Reference'
       required:
         - list
+        - limitExceeded
         - references
 
     CurrentTime:
@@ -2038,6 +2100,23 @@ components:
         vehicleId:
           type: string
           description: ID of the transit vehicle currently serving the trip.
+      required:
+        - activeTripId
+        - blockTripSequence
+        - closestStop
+        - distanceAlongTrip
+        - lastKnownDistanceAlongTrip
+        - lastLocationUpdateTime
+        - lastUpdateTime
+        - occupancyCapacity
+        - occupancyCount
+        - occupancyStatus
+        - phase
+        - predicted
+        - scheduleDeviation
+        - serviceDate
+        - status
+        - totalDistanceAlongTrip
 
     TripDetails:
       type: object
@@ -2054,6 +2133,10 @@ components:
             type: string
         tripId:
           type: string
+        schedule:
+          $ref: '#/components/schemas/TripSchedule'
+        status:
+          $ref: '#/components/schemas/TripStatus'
 
     TripSchedule:
       type: object

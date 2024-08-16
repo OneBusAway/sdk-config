@@ -1897,6 +1897,7 @@ components:
           $ref: '#/components/schemas/Reference'
       required:
         - list
+        - limitExceeded
         - references
 
     RoutesForAgencyResponse:
@@ -2218,6 +2219,7 @@ components:
           $ref: '#/components/schemas/Reference'
 
       required:
+        - limitExceeded
         - list
         - references
 
@@ -2268,6 +2270,7 @@ components:
         references:
           $ref: '#/components/schemas/Reference'
       required:
+        - limitExceeded
         - list
         - references
 

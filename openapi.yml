@@ -2138,6 +2138,11 @@ components:
         status:
           $ref: '#/components/schemas/TripStatus'
 
+      required:
+        - tripId
+        - schedule
+        - status
+
     TripSchedule:
       type: object
       properties:
@@ -2154,6 +2159,11 @@ components:
             $ref: '#/components/schemas/StopTime'
         timeZone:
           type: string
+      required:
+        - stopTimes
+        - timeZone
+        - nextTripId
+        - previousTripId
 
     StopTime:
       type: object

@@ -1835,28 +1835,6 @@ components:
         - tripId
         - stopTimes
 
-    RouteEntry:
-      type: object
-      properties:
-        id:
-          type: string
-        shortName:
-          type: string
-        longName:
-          type: string
-        description:
-          type: string
-        type:
-          type: integer
-        url:
-          type: string
-        color:
-          type: string
-        textColor:
-          type: string
-        agencyId:
-          type: string
-
     ArrivalDepartureForStopResponse:
       type: object
       properties:
@@ -1917,7 +1895,7 @@ components:
       type: object
       properties:
         entry:
-          $ref: '#/components/schemas/RouteEntry'
+          $ref: '#/components/schemas/Route'
         references:
           $ref: '#/components/schemas/Reference'
       required:

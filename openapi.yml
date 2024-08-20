@@ -272,14 +272,43 @@ paths:
       parameters:
         - name: lat
           in: query
+          required: true
           schema:
             type: number
           example: 47.656422
         - name: lon
           in: query
+          required: true
           schema:
             type: number
           example: -122.305641
+        - name: radius
+          in: query
+          required: false
+          description: The radius in meters to search within
+          schema:
+            type: number
+          example: 1000
+        - name: latSpan
+          in: query
+          required: false
+          description: An alternative to radius to set the search bounding box (optional)
+          schema:
+            type: number
+          example: 0.01
+        - name: lonSpan
+          in: query
+          required: false
+          description: An alternative to radius to set the search bounding box (optional)
+          schema:
+            type: number
+          example: 0.01
+        - name: query
+          in: query
+          required: false
+          description: A search query string to filter the results
+          schema:
+            type: string
       responses:
         '200':
           description: Successful response
@@ -695,10 +724,12 @@ paths:
         description: ID of the route
       - name: includePolylines
         in: query
+        required: false
         schema:
           type: boolean
         description: Include polyline elements in the response (default true)
       - name: time
+        required: false
         in: query
         schema:
           type: string

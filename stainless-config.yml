@@ -9,6 +9,7 @@ resources:
   agencies_with_coverage:
     methods:
       list: get /api/where/agencies-with-coverage.json
+      paginated: 'false'
 
   agency:
     methods:

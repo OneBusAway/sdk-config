@@ -18,7 +18,9 @@ resources:
 
   vehicles_for_agency:
     methods:
-      list: get /api/where/vehicles-for-agency/{agencyID}.json
+      list:
+        endpoint: get /api/where/vehicles-for-agency/{agencyID}.json
+        paginated: false
 
   config:
     methods:
@@ -30,11 +32,15 @@ resources:
 
   stops_for_location:
     methods:
-      list: get /api/where/stops-for-location.json
+      list:
+        endpoint: get /api/where/stops-for-location.json
+        paginated: false
 
   stops_for_route:
     methods:
-      list: get /api/where/stops-for-route/{routeID}.json
+      list:
+        endpoint: get /api/where/stops-for-route/{routeID}.json
+        paginated: false
 
   stop:
     methods:
@@ -42,7 +48,9 @@ resources:
 
   stop_ids_for_agency:
     methods:
-      list: get /api/where/stop-ids-for-agency/{agencyID}.json
+      list:
+        endpoint: get /api/where/stop-ids-for-agency/{agencyID}.json
+        paginated: false
 
   schedule_for_stop:
     methods:
@@ -54,15 +62,21 @@ resources:
 
   route_ids_for_agency:
     methods:
-      list: get /api/where/route-ids-for-agency/{agencyID}.json
+      list:
+        endpoint: get /api/where/route-ids-for-agency/{agencyID}.json
+        paginated: false
 
   routes_for_location:
     methods:
-      list: get /api/where/routes-for-location.json
+      list:
+        endpoint: get /api/where/routes-for-location.json
+        paginated: false
 
   routes_for_agency:
     methods:
-      list: get /api/where/routes-for-agency/{agencyID}.json
+      list:
+        endpoint: get /api/where/routes-for-agency/{agencyID}.json
+        paginated: false
 
   schedule_for_route:
     methods:
@@ -70,7 +84,9 @@ resources:
 
   arrival_and_departure:
     methods:
-      list: get /api/where/arrivals-and-departures-for-stop/{stopID}.json
+      list:
+        endpoint: get /api/where/arrivals-and-departures-for-stop/{stopID}.json
+        paginated: false
       retrieve: get /api/where/arrival-and-departure-for-stop/{stopID}.json
 
   trip:
@@ -79,7 +95,9 @@ resources:
 
   trips_for_location:
     methods:
-      list: get /api/where/trips-for-location.json
+      list:
+        endpoint: get /api/where/trips-for-location.json
+        paginated: false
 
   trip-details:
     methods:
@@ -91,7 +109,9 @@ resources:
 
   trips_for_route:
     methods:
-      list: get /api/where/trips-for-route/{routeID}.json
+      list:
+        endpoint: get /api/where/trips-for-route/{routeID}.json
+        paginated: false
 
   report_problem_with_stop:
     methods:

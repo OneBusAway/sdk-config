@@ -1763,6 +1763,23 @@ components:
         vehicleId:
           type: string
           description: ID of the transit vehicle serving this trip.
+      required:
+        - stopId
+        - tripId
+        - serviceDate
+        - routeId
+        - scheduledArrivalTime
+        - scheduledDepartureTime
+        - predictedArrivalTime
+        - predictedDepartureTime
+        - stopSequence
+        - totalStopsInTrip
+        - tripHeadsign
+        - vehicleId
+        - blockTripSequence
+        - arrivalEnabled
+        - departureEnabled
+        - numberOfStopsAway
 
     ScheduleEntry:
       type: object

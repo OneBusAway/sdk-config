@@ -2015,9 +2015,11 @@ components:
                     example: '1_10911'
             references:
               $ref: '#/components/schemas/Reference'
+          required:
+            - entry
+            - references
       required:
         - data
-        - references
     # Trip Components
     TripEntry:
       type: object

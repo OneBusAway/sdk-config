@@ -28,8 +28,6 @@ paths:
                         $ref: '#/components/schemas/CoverageResponse'
                     required:
                       - data
-        '429':
-          $ref: '#/components/responses/RateLimitExceeded'
 
   /api/where/agency/{agencyID}.json:
     get:
@@ -1327,6 +1325,11 @@ components:
           type: integer
         url:
           type: string
+
+      required:
+        - id
+        - type
+        - agencyId
 
     Situation:
       type: object

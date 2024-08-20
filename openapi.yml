@@ -28,6 +28,8 @@ paths:
                         $ref: '#/components/schemas/CoverageResponse'
                     required:
                       - data
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
 
   /api/where/agency/{agencyID}.json:
     get:
@@ -140,6 +142,9 @@ paths:
                         $ref: '#/components/schemas/ScheduleForRouteResponse'
                     required:
                       - data
+
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /api/where/routes-for-location.json:
     get:
@@ -2617,3 +2622,17 @@ components:
             currentTime: 1723054063108
             text: 'resource not found'
             version: 2
+
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseWrapper'
+          examples:
+            rateLimitExceeded:
+              value:
+                code: 429
+                currentTime: 1724179666673
+                text: 'rate limit exceeded'
+                version: 1

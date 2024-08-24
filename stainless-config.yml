@@ -123,11 +123,15 @@ resources:
 
   search_for_stop:
     methods:
-      list: get /api/where/search/stop.json
+      list:
+        endpoint: get /api/where/search/stop.json
+        paginated: false
 
   search_for_route:
     methods:
-      list: get /api/where/search/route.json
+      list:
+        endpoint: get /api/where/search/route.json
+        paginated: false
 
   block:
     methods:

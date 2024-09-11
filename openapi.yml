@@ -125,6 +125,7 @@ paths:
           description: The date for which you want to request a schedule in the format YYYY-MM-DD (optional, defaults to current date)
           schema:
             type: string
+            format: date
           example: '2024-08-12'
       responses:
         '200':

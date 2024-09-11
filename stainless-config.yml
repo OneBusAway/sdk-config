@@ -160,7 +160,21 @@ targets:
   go:
     package_name: onebusaway
     production_repo: null
-    skip: true
+    skip: false
+
+  java:
+    reverse_domain: com.open_transit.api
+    production_repo: null
+    publish:
+      maven: false
+    skip: false
+
+  kotlin:
+    reverse_domain: com.open_transit.api
+    production_repo: null
+    publish:
+      maven: false
+
 settings:
   license: Apache-2.0
 client_settings:

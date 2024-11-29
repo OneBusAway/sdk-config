@@ -172,9 +172,11 @@ targets:
 
   kotlin:
     reverse_domain: org.onebusaway
-    production_repo: null
+    production_repo: OneBusAway/kotlin-sdk
     publish:
-      maven: false
+      maven:
+        sonatype_platform: portal
+    skip: false
 
 settings:
   license: Apache-2.0

@@ -750,6 +750,26 @@ paths:
                   - $ref: '#/components/schemas/ResponseWrapper'
                   - $ref: '#/components/schemas/StopsForRouteResponse'
 
+  /api/where/stops-for-agency/{agencyID}.json:
+    parameters:
+      - name: agencyID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the agency
+    get:
+      summary: Get stops for a specific agency
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - $ref: '#/components/schemas/StopsForAgencyResponse'
+
   /api/where/stop/{stopID}.json:
     parameters:
       - name: stopID
@@ -1501,11 +1521,13 @@ components:
         wheelchairBoarding:
           type: string
       required:
-        - code
         - id
         - lat
         - lon
         - name
+        - parent
+        - routeIds
+        - staticRouteIds
 
     Trip:
       type: object
@@ -1603,53 +1625,35 @@ components:
         - entry
         - references
 
-    StopsForLocation:
-      type: object
-      properties:
-        code:
-          type: string
-        direction:
-          type: string
-        id:
-          type: string
-        lat:
-          type: number
-        locationType:
-          type: integer
-        lon:
-          type: number
-        name:
-          type: string
-        parent:
-          type: string
-        routeIds:
-          type: array
-          items:
-            type: string
-        staticRouteIds:
-          type: array
-          items:
-            type: string
-        wheelchairBoarding:
-          type: string
-      required:
-        - id
-        - lat
-        - lon
-        - name
-        - parent
-        - routeIds
-        - staticRouteIds
-
     StopsForLocationResponse:
       type: object
       properties:
         limitExceeded:
           type: boolean
+        outOfRange:
+          type: boolean
         list:
           type: array
           items:
-            $ref: '#/components/schemas/StopsForLocation'
+            $ref: '#/components/schemas/Stop'
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - list
+        - references
+        - limitExceeded
+
+    StopsForAgencyResponse:
+      type: object
+      properties:
+        limitExceeded:
+          type: boolean
+        outOfRange:
+          type: boolean
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stop'
         references:
           $ref: '#/components/schemas/Reference'
       required:

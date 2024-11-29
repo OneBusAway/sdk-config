@@ -42,6 +42,12 @@ resources:
         endpoint: get /api/where/stops-for-route/{routeID}.json
         paginated: false
 
+  stops_for_agency:
+    methods:
+      list:
+        endpoint: get /api/where/stops-for-agency/{agencyID}.json
+        paginated: false
+
   stop:
     methods:
       retrieve: get /api/where/stop/{stopID}.json

@@ -183,6 +183,11 @@ targets:
       maven:
         sonatype_platform: portal
     skip: false
+  ruby:
+    gem_name: onebusaway-sdk
+    production_repo: OneBusAway/ruby-sdk
+    publish:
+      rubygems: true
 
 settings:
   license: Apache-2.0

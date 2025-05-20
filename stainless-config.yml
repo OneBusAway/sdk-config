@@ -198,6 +198,7 @@ client_settings:
       auth:
         security_scheme: ApiKeyAuth
       read_env: ONEBUSAWAY_API_KEY
+      send_as_query_param: key
 
 environments:
   production: https://api.pugetsound.onebusaway.org

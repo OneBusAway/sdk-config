@@ -1193,9 +1193,6 @@ components:
         - vehicleId
         - lastUpdateTime
         - lastLocationUpdateTime
-        - location
-        - tripId
-        - tripStatus
 
     VehiclesForAgencyResponse:
       type: object
@@ -1995,35 +1992,30 @@ components:
     StopsForRouteResponse:
       type: object
       properties:
-        data:
+        entry:
           type: object
           properties:
-            entry:
-              type: object
-              properties:
-                polylines:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Polylines'
-                routeId:
-                  type: string
-                  example: '1_100224'
-                stopGroupings:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/StopGrouping'
-                stopIds:
-                  type: array
-                  items:
-                    type: string
-                    example: '1_10911'
-            references:
-              $ref: '#/components/schemas/Reference'
-          required:
-            - entry
-            - references
+            polylines:
+              type: array
+              items:
+                $ref: '#/components/schemas/Polylines'
+            routeId:
+              type: string
+              example: '1_100224'
+            stopGroupings:
+              type: array
+              items:
+                $ref: '#/components/schemas/StopGrouping'
+            stopIds:
+              type: array
+              items:
+                type: string
+                example: '1_10911'
+        references:
+          $ref: '#/components/schemas/Reference'
       required:
-        - data
+        - entry
+        - references
     # Trip Components
     TripEntry:
       type: object

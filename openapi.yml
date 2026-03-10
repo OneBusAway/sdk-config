@@ -540,7 +540,6 @@ paths:
                             $ref: '#/components/schemas/Reference'
                         required:
                           - list
-                          - limitExceeded
                           - references
                     required:
                       - data
@@ -1207,7 +1206,6 @@ components:
           $ref: '#/components/schemas/Reference'
       required:
         - list
-        - limitExceeded
         - references
 
     Coverage:
@@ -1233,15 +1231,12 @@ components:
     AgencyResponse:
       type: object
       properties:
-        limitExceeded:
-          type: boolean
         entry:
           $ref: '#/components/schemas/Agency'
         references:
           $ref: '#/components/schemas/Reference'
       required:
         - entry
-        - limitExceeded
         - references
     CoverageResponse:
       type: object
@@ -1256,7 +1251,6 @@ components:
           $ref: '#/components/schemas/Reference'
       required:
         - list
-        - limitExceeded
         - references
 
     CurrentTime:
@@ -1372,12 +1366,6 @@ components:
         reason:
           type: string
           description: Reason for the service alert, taken from TPEG codes.
-          enum:
-            - equipmentReason
-            - environmentReason
-            - personnelReason
-            - miscellaneousReason
-            - securityAlert
         summary:
           type: object
           properties:
@@ -1649,7 +1637,6 @@ components:
       required:
         - list
         - references
-        - limitExceeded
 
     StopsForAgencyResponse:
       type: object
@@ -1667,7 +1654,6 @@ components:
       required:
         - list
         - references
-        - limitExceeded
 
     ArrivalDepartureForStop:
       type: object
@@ -1882,7 +1868,6 @@ components:
       required:
         - list
         - references
-        - limitExceeded
         - outOfRange
 
     ScheduleForRouteResponse:
@@ -1935,7 +1920,6 @@ components:
           $ref: '#/components/schemas/Reference'
       required:
         - list
-        - limitExceeded
         - references
 
     RoutesForAgencyResponse:
@@ -1952,7 +1936,6 @@ components:
       required:
         - list
         - references
-        - limitExceeded
 
     Polylines:
       type: object
@@ -2256,7 +2239,6 @@ components:
           $ref: '#/components/schemas/Reference'
 
       required:
-        - limitExceeded
         - list
         - references
 
@@ -2307,7 +2289,6 @@ components:
         references:
           $ref: '#/components/schemas/Reference'
       required:
-        - limitExceeded
         - list
         - references
 
@@ -2464,7 +2445,6 @@ components:
         references:
           $ref: '#/components/schemas/Reference'
       required:
-        - limitExceeded
         - list
         - outOfRange
         - references
@@ -2603,7 +2583,6 @@ components:
         references:
           $ref: '#/components/schemas/Reference'
       required:
-        - limitExceeded
         - list
         - outOfRange
         - references

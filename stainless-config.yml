@@ -88,6 +88,12 @@ resources:
     methods:
       retrieve: get /api/where/schedule-for-route/{routeID}.json
 
+  arrivals_and_departures_for_location:
+    methods:
+      list:
+        endpoint: get /api/where/arrivals-and-departures-for-location.json
+        paginated: false
+
   arrival_and_departure:
     methods:
       list:

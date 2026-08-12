@@ -42,7 +42,6 @@
 
             # Java / Kotlin
             jdk21
-            ktfmt
           ];
         };
       });

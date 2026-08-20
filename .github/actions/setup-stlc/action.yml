@@ -1,0 +1,83 @@
+name: 'Setup stlc'
+description: 'Install stlc CLI and its dependencies, and configure git auth to fetch private stlc repos.'
+
+inputs:
+  stlc-read-token:
+    description: 'PAT with Contents:Read on stainless/stlc* repos.'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+
+    - name: Enable corepack (pnpm / yarn shims)
+      shell: bash
+      run: corepack enable
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22'
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3'
+        bundler-cache: false
+
+    - name: Setup uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: false
+
+    - name: Setup rye
+      shell: bash
+      run: |
+        curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" RYE_TOOLCHAIN_VERSION="3.13" bash
+        echo "$HOME/.rye/shims" >> "$GITHUB_PATH"
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '21'
+
+    # ktfmt v0.61 matches the SDK's Gradle pin — installs the jar + a PATH wrapper
+    # so scripts/format uses the correct version without the slow Gradle fallback.
+    - name: Setup ktfmt
+      shell: bash
+      run: |
+        mkdir -p "$HOME/.local/bin"
+        curl -fsSL --retry 5 --retry-all-errors --retry-delay 2 -o "$HOME/.local/bin/ktfmt.jar" \
+          https://github.com/facebook/ktfmt/releases/download/v0.61/ktfmt-0.61-with-dependencies.jar
+        printf '#!/usr/bin/env bash\nexec java -jar "$(dirname "${BASH_SOURCE[0]}")/ktfmt.jar" "$@"\n' > "$HOME/.local/bin/ktfmt"
+        chmod +x "$HOME/.local/bin/ktfmt"
+        echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+    - name: Install stlc
+      shell: bash
+      env:
+        STLC_READ_TOKEN: ${{ inputs.stlc-read-token }}
+      run: |
+        git_config_key="url.https://x-access-token:${STLC_READ_TOKEN}@github.com/stainless/.insteadOf"
+        cleanup_stlc_auth() { git config --global --unset-all "$git_config_key" || true; }
+        trap cleanup_stlc_auth EXIT
+        git config --global --add "$git_config_key" "https://github.com/stainless/"
+
+        # Only install targets OneBusAway has access to
+        npm install -g \
+          "git+https://x-access-token:${STLC_READ_TOKEN}@github.com/stainless/stlc.git" \
+          "git+https://x-access-token:${STLC_READ_TOKEN}@github.com/stainless/stlc-go.git" \
+          "git+https://x-access-token:${STLC_READ_TOKEN}@github.com/stainless/stlc-java.git" \
+          "git+https://x-access-token:${STLC_READ_TOKEN}@github.com/stainless/stlc-python.git" \
+          "git+https://x-access-token:${STLC_READ_TOKEN}@github.com/stainless/stlc-ruby.git" \
+          "git+https://x-access-token:${STLC_READ_TOKEN}@github.com/stainless/stlc-typescript.git"
+
+    - name: Check stlc CLI is callable
+      shell: bash
+      run: |
+        stlc --help >/dev/null && echo "stlc is callable"

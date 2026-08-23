@@ -163,35 +163,48 @@ targets:
     production_repo: OneBusAway/js-sdk
     publish:
       npm: true
+      release:
+        branch: main
+        prerelease: true
     staging_repo: OneBusAway/onebusaway-node-staging
   python:
     package_name: onebusaway
     production_repo: OneBusAway/python-sdk
     publish:
       pypi: true
+      release:
+        branch: main
+        prerelease: true
     staging_repo: OneBusAway/onebusaway-python-staging
-
   go:
     package_name: onebusaway
     production_repo: OneBusAway/go-sdk
     skip: false
     staging_repo: OneBusAway/onebusaway-go-staging
-
+    publish:
+      release:
+        branch: main
+        prerelease: true
   java:
     reverse_domain: org.onebusaway
     production_repo: OneBusAway/java-sdk
     publish:
       maven:
         sonatype_platform: portal
+      release:
+        branch: main
+        prerelease: true
     skip: false
     staging_repo: OneBusAway/onebusaway-java-staging
-
   kotlin:
     reverse_domain: org.onebusaway
     production_repo: OneBusAway/kotlin-sdk
     publish:
       maven:
         sonatype_platform: portal
+      release:
+        branch: main
+        prerelease: true
     skip: false
     staging_repo: OneBusAway/onebusaway-kotlin-staging
   ruby:
@@ -199,8 +212,10 @@ targets:
     production_repo: OneBusAway/ruby-sdk
     publish:
       rubygems: true
+      release:
+        branch: main
+        prerelease: true
     staging_repo: OneBusAway/onebusaway-ruby-staging
-
 settings:
   license: Apache-2.0
 client_settings:

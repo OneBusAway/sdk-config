@@ -1235,6 +1235,32 @@ paths:
                         $ref: '#/components/schemas/ShapeResponse'
                     required:
                       - data
+
+  /api/where/situation/{situationID}.json:
+    get:
+      summary: Retrieve a situation by ID
+      description: Retrieve a service alert/situation by ID.
+      parameters:
+        - name: situationID
+          in: path
+          required: true
+          description: The situation ID, encoded directly in the URL
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The situation details
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseWrapper'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SituationResponse'
+                    required:
+                      - data
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -2722,6 +2748,17 @@ components:
           required:
             - length
             - points
+        references:
+          $ref: '#/components/schemas/Reference'
+      required:
+        - entry
+        - references
+
+    SituationResponse:
+      type: object
+      properties:
+        entry:
+          $ref: '#/components/schemas/Situation'
         references:
           $ref: '#/components/schemas/Reference'
       required:

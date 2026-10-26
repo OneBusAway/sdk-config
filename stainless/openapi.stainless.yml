@@ -153,6 +153,10 @@ resources:
     methods:
       retrieve: get /api/where/shape/{shapeID}.json
 
+  situation:
+    methods:
+      retrieve: get /api/where/situation/{situationID}.json
+
   $shared:
     models:
       references: Reference

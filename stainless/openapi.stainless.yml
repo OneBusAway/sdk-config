@@ -145,10 +145,6 @@ resources:
         endpoint: get /api/where/search/route.json
         paginated: false
 
-  block:
-    methods:
-      retrieve: get /api/where/block/{blockID}.json
-
   shape:
     methods:
       retrieve: get /api/where/shape/{shapeID}.json
